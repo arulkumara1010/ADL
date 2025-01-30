@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chess Learning Hub</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Tabs Navigation -->
+      <div class="tabs">
+        <button class="tab-button active" data-tab="about">About Chess</button>
+        <button class="tab-button" data-tab="openings">Openings</button>
+        <button class="tab-button" data-tab="rules">Rules of Chess</button>
+        <button class="tab-button" data-tab="feedback">Feedback Form</button>
+        <button class="tab-button" data-tab="learn-more">Learn More</button>
+      </div>
+
+      <!-- Tabs Content -->
+      <div class="tab-content active" id="about">
+        <h1>About Chess</h1>
+        <p>
+          Chess is a strategy game that requires critical thinking, planning,
+          and execution. Originating in India as Chaturanga, the game evolved
+          into the modern version we play today. Chess is both a recreational
+          activity and a sport that brings together players worldwide.
+        </p>
+        <p>Key benefits of playing chess:</p>
+        <ul>
+          <li>Improves problem-solving skills</li>
+          <li>Enhances memory and cognitive abilities</li>
+          <li>Promotes patience and concentration</li>
+        </ul>
+        <img src="images/board.png" alt="Chess Board" />
+      </div>
+
+      <div class="tab-content" id="openings">
+        <h1>Famous Chess Openings</h1>
+        <p>
+          Understanding chess openings is crucial for gaining a competitive edge
+          early in the game. Here are some popular ones:
+        </p>
+        <ul>
+          <li>
+            <b>Sicilian Defense:</b> One of the most aggressive responses to
+            white's 1.e4.
+          </li>
+          <li>
+            <b>Italian Opening:</b> A solid and strategic opening against 1.e4.
+          </li>
+          <li>
+            <b>Ruy Lopez:</b> A classical opening often seen in top-level games.
+          </li>
+        </ul>
+        <div id="carousel" class="splide">
+          <div class="splide__track">
+            <ul class="splide__list">
+              <li class="splide__slide">
+                <img src="images/sicilian.png" alt="Sicilian Defense" />
+                <p>Sicilian Defense</p>
+              </li>
+              <li class="splide__slide">
+                <img src="images/italian.png" alt="French Defense" />
+                <p>Italian Opening</p>
+              </li>
+              <li class="splide__slide">
+                <img src="images/ruylopez.png" alt="Ruy Lopez" />
+                <p>Ruy Lopez</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="rules">
+        <h1>Rules of Chess</h1>
+        <p>
+          Chess is played on an 8x8 grid, with each player controlling 16
+          pieces:
+        </p>
+        <ul>
+          <li>
+            1 King: The most important piece; the game ends when the king is
+            checkmated.
+          </li>
+          <li>
+            1 Queen: The most powerful piece; moves any number of squares in any
+            direction.
+          </li>
+          <li>
+            2 Rooks: Move horizontally or vertically any number of squares.
+          </li>
+          <li>2 Knights: Move in an L-shape and can jump over other pieces.</li>
+          <li>2 Bishops: Move diagonally any number of squares.</li>
+          <li>8 Pawns: Move one square forward but capture diagonally.</li>
+        </ul>
+        <p>
+          Winning requires strategic planning, controlling the board, and
+          executing a checkmate.
+        </p>
+
+        <!-- Embedded YouTube Video -->
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/fKxG8KjH1Qg?si=rFM1IX550xWEnZYp"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <div class="tab-content" id="feedback">
+        <h1>Feedback Form</h1>
+        <form id="feedbackForm">
+          <label for="name">Your Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            required
+          />
+
+          <label for="email">Your Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+
+          <label for="feedback">Your Feedback:</label>
+          <textarea
+            id="feedback"
+            name="feedback"
+            rows="5"
+            placeholder="Share your thoughts..."
+            required
+          ></textarea>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+      <div class="tab-content" id="learn-more">
+        <h1>Learn More</h1>
+        <p>Explore more resources to deepen your understanding of chess:</p>
+        <ul>
+          <li>
+            <a href="https://www.chess.com" target="_blank"
+              >Chess.com: Tutorials, puzzles, and games</a
+            >
+          </li>
+          <li>
+            <a href="https://www.fide.com" target="_blank"
+              >FIDE: Official chess rules and tournaments</a
+            >
+          </li>
+          <li>
+            <a href="https://lichess.org" target="_blank"
+              >Lichess: Free online chess platform</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

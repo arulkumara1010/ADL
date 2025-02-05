@@ -1,0 +1,15 @@
+{
+    "name": "Java Servlet Application",
+    "dockerFile": "Dockerfile",
+    "forwardPorts": [8080],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "redhat.vscode-xml",
+                "vmware.vscode-spring-boot"
+            ]
+        }
+    },
+    "postCreateCommand": "mvn clean install"
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie Management System</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      #cookieList {
+        margin-top: 20px;
+      }
+      button {
+        margin: 5px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Cookie Management System</h2>
+    <button onclick="listCookies()">List Cookies</button>
+    <button onclick="addCookie()">Add Cookie</button>
+    <div id="cookieList"></div>
+
+    <script>
+      function listCookies() {
+        let cookies = document.cookie.split("; ");
+        let output = "<h3>Stored Cookies:</h3><ul>";
+        cookies.forEach((cookie) => {
+          if (cookie) output += `<li>${cookie}</li>`;
+        });
+        output += "</ul>";
+        document.getElementById("cookieList").innerHTML = output;
+      }
+
+      function addCookie() {
+        let name = prompt("Enter cookie name:");
+        let value = prompt("Enter cookie value:");
+        if (name && value) {
+          document.cookie = `${name}=${value}; path=/;`;
+          alert("Cookie added!");
+        }
+      }
+    </script>
+  </body>
+</html>

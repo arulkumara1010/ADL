@@ -3,44 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookie Management System</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-      }
-      #cookieList {
-        margin-top: 20px;
-      }
-      button {
-        margin: 5px;
-        padding: 10px;
-      }
-    </style>
+    <title>Cookie Manager</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
   </head>
-  <body>
-    <h2>Cookie Management System</h2>
-    <button onclick="listCookies()">List Cookies</button>
-    <button onclick="addCookie()">Add Cookie</button>
-    <div id="cookieList"></div>
+  <body class="container mt-5">
+    <h2 class="mb-4">Browser Cookie Manager</h2>
+
+    <button class="btn btn-primary" onclick="listCookies()">
+      List Cookies
+    </button>
+    <ul id="cookieList" class="list-group mt-3"></ul>
+
+    <div class="mt-4">
+      <input
+        type="text"
+        id="cookieName"
+        class="form-control mb-2"
+        placeholder="Cookie Name"
+      />
+      <input
+        type="text"
+        id="cookieValue"
+        class="form-control mb-2"
+        placeholder="Cookie Value"
+      />
+      <button class="btn btn-success" onclick="setCookie()">Set Cookie</button>
+    </div>
 
     <script>
       function listCookies() {
-        let cookies = document.cookie.split("; ");
-        let output = "<h3>Stored Cookies:</h3><ul>";
+        const cookies = document.cookie.split("; ");
+        const cookieList = document.getElementById("cookieList");
+        cookieList.innerHTML = "";
         cookies.forEach((cookie) => {
-          if (cookie) output += `<li>${cookie}</li>`;
+          const li = document.createElement("li");
+          li.classList.add("list-group-item");
+          li.textContent = cookie;
+          cookieList.appendChild(li);
         });
-        output += "</ul>";
-        document.getElementById("cookieList").innerHTML = output;
       }
 
-      function addCookie() {
-        let name = prompt("Enter cookie name:");
-        let value = prompt("Enter cookie value:");
+      function setCookie() {
+        const name = document.getElementById("cookieName").value;
+        const value = document.getElementById("cookieValue").value;
         if (name && value) {
           document.cookie = `${name}=${value}; path=/;`;
-          alert("Cookie added!");
+          alert("Cookie Set Successfully");
+          listCookies();
+        } else {
+          alert("Please enter both cookie name and value.");
         }
       }
     </script>

@@ -1,16 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: arulk
-  Date: 08-02-2025
-  Time: 12:43
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
-</html>
+<%@ page import="java.sql.*" %>
+<%
+    String jdbcURL = "jdbc:mysql://localhost:3306/user_auth";
+    String dbUser = "root";
+    String dbPassword = "";
+
+    Connection conn = null;
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        conn = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
+    } catch (Exception e) {
+        out.println("Database Connection Failed: " + e.getMessage());
+    }
+%>

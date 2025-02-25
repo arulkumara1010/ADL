@@ -1,81 +1,116 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(GUIDemoApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  // Make navigation bar transparent
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent,
+    ),
+  );
+  // Enable edge-to-edge display
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  runApp(const GUIDemoApp());
 }
 
 class GUIDemoApp extends StatefulWidget {
+  const GUIDemoApp({super.key});
+
   @override
   _GUIDemoAppState createState() => _GUIDemoAppState();
 }
 
 class _GUIDemoAppState extends State<GUIDemoApp> {
   String selectedFont = 'Poppins';
-  bool isDarkMode = false; // Add dark mode state
+  bool isDarkMode = false;
+  bool useAlternateColorScheme = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: _buildTheme(isDarkMode), // Pass dark mode flag to theme builder
+      theme: _buildTheme(isDarkMode, useAlternateColorScheme),
       home: HomeScreen(
         selectedFont: selectedFont,
-        isDarkMode: isDarkMode, // Pass dark mode state
+        isDarkMode: isDarkMode,
+        useAlternateColorScheme: useAlternateColorScheme,
         onFontChanged: (newFont) {
           setState(() => selectedFont = newFont);
         },
         onThemeChanged: (darkMode) {
-          // Add theme change callback
           setState(() => isDarkMode = darkMode);
+        },
+        onColorSchemeChanged: () {
+          setState(() => useAlternateColorScheme = !useAlternateColorScheme);
         },
       ),
     );
   }
 
-  ThemeData _buildTheme(bool darkMode) {
-    // Define color scheme based on mode
-    ColorScheme colorScheme = darkMode
+  ThemeData _buildTheme(bool darkMode, bool useAlternateColorScheme) {
+    // Default color scheme
+    Color primaryPink = const Color(0xFFFF2165); // Extracted pink
+    Color secondaryPink =
+        const Color.fromARGB(255, 255, 31, 128); // Slightly darker pink
+
+    // Alternate color scheme
+    Color alternatePrimary = const Color.fromARGB(255, 104, 76, 175); // Green
+    Color alternateSecondary =
+        const Color.fromARGB(255, 74, 153, 195); // Light green
+
+    ColorScheme defaultColorScheme = darkMode
         ? ColorScheme.dark(
-            primary: Colors.tealAccent,
-            secondary: Colors.indigoAccent,
-            background: Colors.grey[850]!,
+            primary: primaryPink,
+            secondary: secondaryPink,
             surface: Colors.grey[900]!,
           )
-        : ColorScheme.fromSeed(
-            seedColor: Colors.teal,
-            primary: Colors.teal,
-            secondary: Colors.indigoAccent,
-            background: Colors.grey[100]!,
+        : ColorScheme.light(
+            primary: primaryPink,
+            secondary: secondaryPink,
+            surface: Colors.white,
+          );
+
+    ColorScheme alternateColorScheme = darkMode
+        ? ColorScheme.dark(
+            primary: alternatePrimary,
+            secondary: alternateSecondary,
+            surface: Colors.grey[900]!,
+          )
+        : ColorScheme.light(
+            primary: alternatePrimary,
+            secondary: alternateSecondary,
+            surface: Colors.grey[100]!,
           );
 
     return ThemeData(
-      colorScheme: colorScheme,
+      colorScheme:
+          useAlternateColorScheme ? alternateColorScheme : defaultColorScheme,
       brightness: darkMode ? Brightness.dark : Brightness.light,
       textTheme: GoogleFonts.getTextTheme(
-          selectedFont,
-          darkMode
-              ? Typography.whiteMountainView
-              : Typography.blackMountainView),
+        selectedFont,
+        darkMode ? Typography.whiteMountainView : Typography.blackMountainView,
+      ),
       cardColor: darkMode ? Colors.grey[800] : Colors.white,
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         ),
       ),
     );
@@ -85,16 +120,20 @@ class _GUIDemoAppState extends State<GUIDemoApp> {
 class HomeScreen extends StatefulWidget {
   final String selectedFont;
   final bool isDarkMode;
+  final bool useAlternateColorScheme;
   final Function(String) onFontChanged;
   final Function(bool) onThemeChanged;
+  final VoidCallback onColorSchemeChanged;
 
   const HomeScreen({
-    Key? key,
+    super.key,
     required this.selectedFont,
     required this.isDarkMode,
+    required this.useAlternateColorScheme,
     required this.onFontChanged,
     required this.onThemeChanged,
-  }) : super(key: key);
+    required this.onColorSchemeChanged,
+  });
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -104,48 +143,102 @@ class _HomeScreenState extends State<HomeScreen> {
   TimeOfDay selectedTime = TimeOfDay.now();
   DateTime selectedDate = DateTime.now();
   int selectedRadio = 1;
+  String enteredName = "Enter Name"; // Default button text
+
+  void _showInputDialog(BuildContext context) {
+    TextEditingController nameController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Enter Your Name"),
+        content: TextField(
+          controller: nameController,
+          decoration: const InputDecoration(hintText: "Type your name here"),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              String name = nameController.text.trim();
+              if (name.isNotEmpty) {
+                setState(() {
+                  enteredName = "Hi, $name!"; // Update button text
+                });
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Hello, $name!")),
+                );
+              }
+            },
+            child: const Text("Submit"),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: _buildAppBar(theme),
-      backgroundColor: theme.colorScheme.background,
+      backgroundColor: theme.colorScheme.surface,
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           children: [
+            _buildCard(
+              title: "Font Selection",
+              theme: theme,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildFontRadioButton('Poppins', theme),
+                  _buildFontRadioButton('Josefin Sans', theme),
+                  _buildFontRadioButton('Space Grotesk', theme),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
             _buildCard(
               title: "Buttons",
               theme: theme,
               child: Column(
                 children: [
-                  _styledButton("Elevated", theme.colorScheme.primary, () {}),
-                  SizedBox(height: 8),
+                  _styledButton("Show Snackbar", theme.colorScheme.primary, () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Hello! This is a Snackbar."),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }),
+                  const SizedBox(height: 8),
                   _styledOutlinedButton(
-                      "Outlined", theme.colorScheme.secondary, () {}),
-                  SizedBox(height: 8),
-                  _styledTextButton("Text", theme.colorScheme.primary, () {}),
+                    enteredName,
+                    theme.colorScheme.secondary,
+                    () {
+                      _showInputDialog(context); // Open input dialog
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  _styledTextButton(
+                    "Change Color Scheme",
+                    theme.colorScheme.primary,
+                    widget.onColorSchemeChanged,
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 16),
-            _buildCard(
-              title: "Radio Buttons",
-              theme: theme,
-              child: Column(
-                children: [
-                  _styledRadioButton(1, "Option 1"),
-                  _styledRadioButton(2, "Option 2"),
-                ],
-              ),
-            ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildCard(
               title: "Theme Mode",
               theme: theme,
               child: Row(
-                // Use Row instead of Column to keep elements on same line
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
@@ -160,29 +253,87 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildCard(
               title: "Date Picker",
               theme: theme,
-              child: _styledTextButton(
-                "Select Date: ${DateFormat('yyyy-MM-dd').format(selectedDate)}",
-                theme.colorScheme.secondary,
-                () => _selectDate(context),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    DateFormat('yyyy-MM-dd').format(selectedDate),
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.calendar_today,
+                        color: theme.colorScheme.primary),
+                    onPressed: () => _selectDate(context),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildCard(
               title: "Time Picker",
               theme: theme,
-              child: _styledTextButton(
-                "Selected Time: ${selectedTime.format(context)}",
-                theme.colorScheme.primary,
-                () => _selectTime(context),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    selectedTime.format(context),
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.access_time,
+                        color: theme.colorScheme.primary),
+                    onPressed: () => _selectTime(context),
+                  ),
+                ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildFontRadioButton(String fontName, ThemeData theme) {
+    return Row(
+      children: [
+        Radio<String>(
+          value: fontName,
+          groupValue: widget.selectedFont,
+          activeColor: theme.colorScheme.primary,
+          onChanged: (String? newValue) {
+            if (newValue != null) {
+              widget.onFontChanged(newValue);
+            }
+          },
+        ),
+        Text(
+          fontName,
+          style: GoogleFonts.getFont(
+            fontName,
+            textStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: widget.selectedFont == fontName
+                  ? FontWeight.bold
+                  : FontWeight.normal,
+            ),
+          ),
+        ),
+        if (widget.selectedFont == fontName)
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              "(Current)",
+              style: TextStyle(
+                color: theme.colorScheme.primary,
+                fontSize: 12,
+              ),
+            ),
+          ),
+      ],
     );
   }
 
@@ -199,20 +350,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       title: Text(
         'Flutter GUI Demo',
-        style: theme.textTheme.titleLarge?.copyWith(color: Colors.white),
-      ),
-      actions: [
-        DropdownButton<String>(
-          value: widget.selectedFont,
-          icon: const Icon(Icons.font_download, color: Colors.white),
-          dropdownColor: theme.colorScheme.primary.withOpacity(0.9),
-          style: theme.textTheme.titleMedium?.copyWith(color: Colors.white),
-          onChanged: (newValue) => widget.onFontChanged(newValue!),
-          items: ['Poppins', 'Lato', 'Roboto']
-              .map((font) => DropdownMenuItem(value: font, child: Text(font)))
-              .toList(),
+        style: theme.textTheme.titleLarge?.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
-      ],
+      ),
     );
   }
 
@@ -247,8 +389,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Text(
               title,
-              style: theme.textTheme.titleLarge
-                  ?.copyWith(color: theme.colorScheme.primary),
+              style: theme.textTheme.titleLarge?.copyWith(
+                color: theme.colorScheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 16),
             child,
@@ -266,7 +410,7 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: color,
         ),
         onPressed: onPressed,
-        child: Text(text, style: TextStyle(color: Colors.white)),
+        child: Text(text, style: const TextStyle(color: Colors.white)),
       ),
     );
   }
@@ -294,20 +438,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: onPressed,
         child: Text(text, style: TextStyle(color: textColor)),
       ),
-    );
-  }
-
-  Widget _styledRadioButton(int value, String text) {
-    return Row(
-      children: [
-        Radio(
-          value: value,
-          groupValue: selectedRadio,
-          activeColor: Colors.teal,
-          onChanged: (val) => setState(() => selectedRadio = val!),
-        ),
-        Text(text),
-      ],
     );
   }
 }

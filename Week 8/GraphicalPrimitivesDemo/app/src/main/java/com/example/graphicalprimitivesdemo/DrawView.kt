@@ -31,7 +31,7 @@ class DrawView(context: Context) : View(context) {
 
     private val linePaint = Paint().apply {
         color = Color.GREEN
-        strokeWidth = 10f
+        strokeWidth = 15f
         style = Paint.Style.STROKE
         isAntiAlias = true
     }
@@ -51,33 +51,33 @@ class DrawView(context: Context) : View(context) {
         super.onDraw(canvas)
 
         // Set background color
-        canvas.drawColor(Color.WHITE)
+        canvas.drawColor(Color.BLACK)
 
-        // Draw static shapes for Exercise 1
+        // Draw static shapes with new positions and sizes
 
-        // Draw a red circle (positioned relative to screen size)
-        val circleX = screenWidth * 0.25f
-        val circleY = screenHeight * 0.2f
-        val circleRadius = screenWidth * 0.1f
+        // Draw a magenta circle (positioned relative to screen size)
+        val circleX = screenWidth * 0.7f
+        val circleY = screenHeight * 0.3f
+        val circleRadius = screenWidth * 0.15f
         canvas.drawCircle(circleX, circleY, circleRadius, circlePaint)
 
-        // Draw a blue rectangle (positioned relative to screen size)
-        val rectLeft = screenWidth * 0.5f
-        val rectTop = screenHeight * 0.1f
-        val rectRight = screenWidth * 0.9f
-        val rectBottom = screenHeight * 0.3f
+        // Draw a cyan rectangle (positioned relative to screen size)
+        val rectLeft = screenWidth * 0.2f
+        val rectTop = screenHeight * 0.5f
+        val rectRight = screenWidth * 0.6f
+        val rectBottom = screenHeight * 0.7f
         canvas.drawRect(rectLeft, rectTop, rectRight, rectBottom, rectanglePaint)
 
-        // Draw a green line (positioned relative to screen size)
+        // Draw a yellow line (positioned relative to screen size)
         val lineStartX = screenWidth * 0.1f
-        val lineStartY = screenHeight * 0.4f
+        val lineStartY = screenHeight * 0.8f
         val lineEndX = screenWidth * 0.9f
-        val lineEndY = screenHeight * 0.4f
+        val lineEndY = screenHeight * 0.9f
         canvas.drawLine(lineStartX, lineStartY, lineEndX, lineEndY, linePaint)
 
         // Draw circles at touch positions for Exercise 2
         for (position in touchPositions) {
-            canvas.drawCircle(position.first, position.second, circleRadius, circlePaint)
+            canvas.drawCircle(position.first, position.second, circleRadius * 0.7f, circlePaint)
         }
     }
 

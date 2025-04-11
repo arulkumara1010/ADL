@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Rubik } from "next/font/google";
+import { Inter } from "next/font/google";
 
 // Import Fira Code with desired subsets
-const firaCode = Rubik({ subsets: ["latin"] });
+const firaCode = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "To-Do List",

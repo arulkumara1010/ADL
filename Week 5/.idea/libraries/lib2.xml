@@ -1,0 +1,43 @@
+<component name="libraryTable">
+  <library name="lib2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jackson-module-jakarta-xmlbind-annotations-2.16.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jersey-client-4.0.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jdeparser-2.0.3.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/weld-se-core-6.0.0.Beta4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jersey-container-servlet-4.0.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jboss-logging-3.5.3.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/osgi-resource-locator-1.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.interceptor-api-2.2.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jersey-media-json-jackson-4.0.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jboss-classfilewriter-1.3.1.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.enterprise.lang-model-4.1.0.RC1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.el-api-5.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.validation-api-3.1.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/weld-api-6.0.Beta5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/weld-spi-6.0.Beta5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/weld-environment-common-6.0.0.Beta4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.ws.rs-api-3.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.xml.bind-api-4.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jersey-entity-filtering-4.0.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jboss-logging-annotations-2.2.1.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/weld-lite-extension-translator-6.0.0.Beta4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jersey-cdi2-se-4.0.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jackson-annotations-2.16.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.enterprise.cdi-api-4.1.0.RC1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jersey-container-servlet-core-4.0.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jersey-server-4.0.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.inject-api-2.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jackson-databind-2.16.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.annotation-api-3.0.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jboss-logging-processor-2.2.1.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jersey-common-4.0.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jackson-core-2.16.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.enterprise.cdi-el-api-4.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/weld-core-impl-6.0.0.Beta4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AgeCheck/target/AgeCheck-1.0-SNAPSHOT/WEB-INF/lib/jakarta.activation-api-2.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

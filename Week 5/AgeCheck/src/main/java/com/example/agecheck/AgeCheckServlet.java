@@ -1,5 +1,4 @@
 package com.example.agecheck;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.annotation.WebServlet;
